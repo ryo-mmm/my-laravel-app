@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ロジカル開発 - @yield('title')</title>
+    <title>My Tasks - @yield('title')</title>
     <style>
         body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; }
         .container { max-width: 800px; margin: 40px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
