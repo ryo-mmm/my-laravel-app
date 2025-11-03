@@ -1,6 +1,8 @@
 #📚 Laravel CRUD 学習プロジェクト
 
-このリポジトリは、Apple Silicon (M1/M2/M3) Mac 環境において、Laravel Sail (Docker) を使用してプロフェッショナルな開発環境を構築し、CRUD (Create, Read, Update, Delete) の基本操作を実装することを目的とした学習プロジェクトです。
+このリポジトリは、Apple Silicon (M1/M2/M3) Mac 環境において、Laravel Sail (Docker) を使用して開発環境を構築し、タスク管理アプリ作成を題材に CRUD (Create, Read, Update, Delete) の基本操作を実装することを目的とした学習プロジェクトです。
+
+![CRUD操作の画面例](public/images/My Tasks top.png)
 
 #🚀 開発環境の概要
 

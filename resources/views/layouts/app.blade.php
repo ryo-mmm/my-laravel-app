@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <h1>Web開発 ロジカル・ガイド (共通ヘッダー)</h1>
+        <h1>My Tasks</h1>
     </header>
 
     <div class="container">
@@ -22,7 +22,7 @@
     </div>
 
     <footer>
-        <p>Copyright © {{ date('Y') }} Logic Guide. All rights reserved.</p>
+        <p>© {{ date('Y') }} My Tasks. All rights reserved.</p>
     </footer>
 </body>
 </html>
