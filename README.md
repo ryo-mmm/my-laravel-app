@@ -1,60 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+📚 Laravel CRUD 学習プロジェクト
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+このリポジトリは、Apple Silicon (M1/M2/M3) Mac 環境において、Laravel Sail (Docker) を使用してプロフェッショナルな開発環境を構築し、CRUD (Create, Read, Update, Delete) の基本操作を実装することを目的とした学習プロジェクトです。
 
-## About Laravel
+🚀 開発環境の概要
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+フレームワーク: Laravel 10.x
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+実行環境: Laravel Sail (Docker Compose)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+対応アーキテクチャ: Apple Silicon (ARM64) 最適化済み
 
-## Learning Laravel
+使用サービス: Web/PHP, MySQL, Redis, Mailpit
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+🛠️ プロジェクトのセットアップと実行
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+プロジェクトを開始するために、以下の手順で Docker コンテナを起動します。
 
-## Laravel Sponsors
+1. リポジトリのクローンと依存関係のインストール
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# プロジェクトディレクトリに移動
 
-### Premium Partners
+cd my-laravel-app
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 依存関係をインストールし、Sail 環境を起動
 
-## Contributing
+# (初回起動時は Docker イメージのビルドに時間がかかります)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+docker compose up -d --build
 
-## Code of Conduct
+2. 環境設定とデータベースマイグレーション
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Docker コンテナが起動したら、sail コマンドで Artisan ツールを実行し、データベースを準備します。
 
-## Security Vulnerabilities
+# .env ファイルの設定
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+cp .env.example .env
 
-## License
+# アプリケーションキーの生成
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# my-laravel-app
+./vendor/bin/sail artisan key:generate
+
+# データベースにテーブルを作成
+
+./vendor/bin/sail artisan migrate
+
+3. アプリケーションの実行
+
+セットアップ完了後、以下の URL でタスク管理アプリケーションにアクセスできます。
+
+http://localhost
+
+📋 主な学習機能 (CRUD 実装)
+
+本プロジェクトでは、シンプルなタスク管理アプリを通じて、以下のコントローラ、ルーティング、モデルを使用した CRUD 操作を実装しました。
+
+1. データ作成 (Create)
+
+機能: フォームにタスク内容を入力し、データベース (tasks テーブル) に新しいレコードを挿入します。
+
+ルーティング: POST /
+
+コントローラ: GreetingController@storeTask
+
+2. データ読み出し (Read)
+
+機能: データベースに存在する全てのタスクを取得し、一覧として表示します。
+
+ルーティング: GET /
+
+コントローラ: GreetingController@showTasks
+
+3. データ更新 (Update)
+
+機能: タスクの状態 (完了/未完了) を切り替えます。ルートモデルバインディングを使用し、URL から受け取った ID に基づいてモデルを自動注入しています。
+
+ルーティング: PATCH /task/{task}
+
+コントローラ: GreetingController@updateTask
+
+4. データ削除 (Delete)
+
+機能: 特定のタスクをデータベースから完全に削除します。
+
+ルーティング: DELETE /task/{task}
+
+コントローラ: GreetingController@deleteTask
