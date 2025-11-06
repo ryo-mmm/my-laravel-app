@@ -10,7 +10,14 @@
     <form action="/" method="POST">
         @csrf
 
-        <input type="text" name="description" placeholder="新しいタスクを入力" required>
+        <input type="text" name="description" placeholder="新しいタスクを入力" value="{{ old('description') }}">
+
+        @error('description')
+            <div style="color: red;">
+                {{ $message }}
+            </div>
+        @enderror
+
         <button type="submit">タスクを追加</button>
     </form>
 

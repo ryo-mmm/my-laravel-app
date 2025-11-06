@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreTaskRequest;
 
 class GreetingController extends Controller
 {
@@ -33,22 +34,19 @@ class GreetingController extends Controller
      * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\RedirectResponse
      */
-
-    public function storeTask(Request $request)
+    // 引数を標準の Request から StoreTaskRequest に変更
+    public function storeTask(StoreTaskRequest $request)
     {
-        // 1. バリデーション（入力チェック）：descriptionが必須であることを確認
-        $request->validate([
-            'description' => 'required|max:255',
-        ]);
+        $validatedData = $request->validated();
 
-        // 2. データベースへ保存
-        Task::create([
-            'description' => $request->description,
-            'is_completed' => false, // デフォルトは未完了
-        ]);
+        $task = new Task;
+        // $validatedData['description'] を使用
+        $task->description = $validatedData['description'];
+        $task->is_completed = false;
+        $task->save();
 
-        // 3. リダイレクト：フォームの再送信を防ぐため、一覧ページへ戻る
-        return redirect('/');
+        // 成功メッセージと共に一覧画面へリダイレクト
+        return redirect('/')->with('status', '新しいタスクを作成しました。');
     }
 
     /**
